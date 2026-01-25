@@ -1,0 +1,16 @@
+# Directorio de artefactos de rust
+target
+backend/target
+# Directorio de artefactos de Node
+node_modules
+frontend/node_modules
+front
+back
+# Ignorar carpetas de control de versiones
+.git
+
+# Ignorar archivos temporales o de configuración local
+.vscode
+*.log
+npm-debug.log
+.DS_Store

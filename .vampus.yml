@@ -1,0 +1,8 @@
+current_version: 0.1.0
+replaces:
+- file: backend/Cargo.toml
+  pattern: ^version\s*=\s*\"{{current_version}}\"$
+- file: frontend/.env
+  pattern: ^VITE_VERSION={{current_version}}$
+- file: frontend/.env.development
+  pattern: ^VITE_VERSION={{current_version}}$

@@ -189,12 +189,12 @@ let app = Router::new()
 2. **server-builder**: Compilación Rust en Alpine con OpenSSL estático
 3. **final**: Imagen Alpine mínima con binario + assets + migraciones
 
-### Registry Personalizado
+### Docker Hub
 
-El proyecto usa un registry privado:
+La imagen está disponible en Docker Hub:
 
 ```
-registry.territoriolinux.es/atareao/quma
+atareao/quma
 ```
 
 ## 📝 Base de Datos
@@ -229,7 +229,7 @@ Este proyecto está bajo la licencia MIT. Ver el archivo `LICENSE` para más det
 **atareao**
 
 - GitHub: [@atareao](https://github.com/atareao)
-- Registry: [registry.territoriolinux.es](https://registry.territoriolinux.es)
+- Docker Hub: [atareao/quma](https://hub.docker.com/r/atareao/quma)
 
 ## 🔗 Enlaces Útiles
 

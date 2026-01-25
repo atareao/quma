@@ -2,7 +2,7 @@
 ###############################################################################
 ## Client builder
 ###############################################################################
-FROM node:22-slim AS client-builder
+FROM node:23-slim AS client-builder
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
@@ -14,7 +14,7 @@ RUN pnpm run build
 ###############################################################################
 ## Server builder
 ###############################################################################
-FROM rust:alpine3.22 AS server-builder
+FROM rust:alpine3.23 AS server-builder
 RUN apk add --update --no-cache \
             autoconf \
             gcc \
@@ -40,7 +40,7 @@ RUN cargo build --release --locked
 ###############################################################################
 ## Final image
 ###############################################################################
-FROM alpine:3.22
+FROM alpine:3.23
 
 ENV USER=app \
     UID=1000

@@ -39,7 +39,7 @@ just backend      # Run Rust backend with RUST_LOG=debug
 just watch        # Run backend with cargo-watch (60s debounce)
 just upgrade      # Bump version, update deps, tag, cleanup old images
 just build        # Build Docker image with current version
-just push         # Push to registry.territoriolinux.es
+just push         # Push to Docker Hub
 ```
 
 **Key Pattern**: `just dev` copies built frontend assets to `backend/static/` - this mimics production setup where backend serves frontend.
@@ -158,5 +158,5 @@ The final image exposes port 3000 and runs `/app/backend` as the `app` user.
 
 - **Directory Naming**: Git history shows migration from `back/`+`front/` to `backend/`+`frontend/` - always use full names
 - **Environment Variables**: Frontend uses `VITE_VERSION` from `.env` files (managed by Vampus, gitignored)
-- **Registry**: Custom Docker registry at `registry.territoriolinux.es/atareao/quma`
+- **Registry**: Docker Hub at `atareao/quma`
 - **Uploads**: Production container expects `/app/static/uploads` directory

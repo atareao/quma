@@ -1,9 +1,9 @@
 use axum::{
+    Router,
     extract::Json,
     http::StatusCode,
     response::IntoResponse,
     routing::{get, post},
-    Router,
 };
 use serde::{Deserialize, Serialize};
 use std::{fs, path::PathBuf, process::Command};
@@ -139,12 +139,7 @@ async fn save_quadlet(
         .unwrap_or(&payload.name)
         .to_string();
 
-    Ok(Json(Quadlet::new(
-        name,
-        kind,
-        payload.content,
-        file_path,
-    )))
+    Ok(Json(Quadlet::new(name, kind, payload.content, file_path)))
 }
 
 /// Obtiene el directorio de quadlets del usuario
@@ -206,10 +201,7 @@ mod tests {
             QuadletType::from_extension(".kube"),
             Some(QuadletType::Kube)
         );
-        assert_eq!(
-            QuadletType::from_extension(".pod"),
-            Some(QuadletType::Pod)
-        );
+        assert_eq!(QuadletType::from_extension(".pod"), Some(QuadletType::Pod));
         assert_eq!(
             QuadletType::from_extension(".image"),
             Some(QuadletType::Image)
@@ -255,9 +247,12 @@ mod tests {
             };
 
             let path = PathBuf::from(&request.name);
-            let extension = path.extension().and_then(|e| e.to_str()).map(|e| format!(".{}", e));
+            let extension = path
+                .extension()
+                .and_then(|e| e.to_str())
+                .map(|e| format!(".{}", e));
             assert!(extension.is_some());
-            
+
             let kind = QuadletType::from_extension(&extension.unwrap());
             assert!(kind.is_some());
         }
@@ -277,8 +272,8 @@ mod tests {
 
         // Debe responder con 200 OK o error interno si el directorio no existe
         assert!(
-            response.status() == StatusCode::OK 
-            || response.status() == StatusCode::INTERNAL_SERVER_ERROR
+            response.status() == StatusCode::OK
+                || response.status() == StatusCode::INTERNAL_SERVER_ERROR
         );
     }
 
@@ -352,7 +347,7 @@ mod tests {
         };
 
         assert_eq!(error.error, "Test error");
-        
+
         // Verificar que se serializa correctamente
         let json = serde_json::to_string(&error).unwrap();
         assert!(json.contains("Test error"));

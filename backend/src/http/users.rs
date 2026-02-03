@@ -1,9 +1,9 @@
 use axum::{
+    Router,
     extract::{Json, Path},
     http::StatusCode,
     response::IntoResponse,
-    routing::{get, post, delete},
-    Router,
+    routing::{delete, get, post},
 };
 use serde::{Deserialize, Serialize};
 
@@ -125,9 +125,7 @@ async fn create_user(
 }
 
 /// DELETE /api/users/:id - Elimina un usuario
-async fn delete_user(
-    Path(id): Path<i64>,
-) -> Result<StatusCode, (StatusCode, Json<ErrorResponse>)> {
+async fn delete_user(Path(id): Path<i64>) -> Result<StatusCode, (StatusCode, Json<ErrorResponse>)> {
     // TODO: Implementar con SQLite
     Err((
         StatusCode::NOT_FOUND,

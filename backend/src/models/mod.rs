@@ -3,6 +3,7 @@ mod response;
 mod paginable;
 
 pub use quadlet::{Quadlet, QuadletType};
+pub use response::ApiResponse;
 pub type Error = Box<dyn std::error::Error + Send + Sync>;
 pub struct AppState {
     pub secret: String,

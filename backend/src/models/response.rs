@@ -163,7 +163,7 @@ pub struct EmptyResponse {
     pub message: String,
 }
 impl EmptyResponse {
-    pub fn create(status: StatusCode, message: &str) -> Response<Body> {
+    pub fn new(status: StatusCode, message: &str) -> Response<Body> {
         Response::builder()
             .status(status)
             .body(Body::from(message.to_string())) // Cuerpo de la respuesta
@@ -173,7 +173,7 @@ impl EmptyResponse {
 
 impl IntoResponse for EmptyResponse {
     fn into_response(self) -> Response {
-        EmptyResponse::create(self.status, self.message.as_str())
+        EmptyResponse::new(self.status, self.message.as_str())
     }
 }
 

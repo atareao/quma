@@ -2,13 +2,13 @@ use axum::{
     Router,
     extract::Json,
     http::StatusCode,
-    response::IntoResponse,
     routing::{get, post},
 };
+use std::sync::Arc;
 use serde::{Deserialize, Serialize};
 use std::{fs, path::PathBuf, process::Command};
 
-use crate::models::{Quadlet, QuadletType};
+use crate::models::{Quadlet, QuadletType, AppState};
 
 /// Request para guardar un quadlet
 #[derive(Debug, Serialize, Deserialize)]
@@ -24,7 +24,7 @@ pub struct ErrorResponse {
 }
 
 /// Crea el router para gestión de quadlets
-pub fn router() -> Router {
+pub fn router() -> Router<Arc<AppState>> {
     Router::new()
         .route("/", get(list_quadlets))
         .route("/", post(save_quadlet))

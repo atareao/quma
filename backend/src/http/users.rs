@@ -5,7 +5,9 @@ use axum::{
     response::IntoResponse,
     routing::{delete, get, post},
 };
+use std::sync::Arc;
 use serde::{Deserialize, Serialize};
+use crate::models::AppState;
 
 /// Usuario del sistema
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -54,7 +56,7 @@ pub struct ErrorResponse {
 }
 
 /// Crea el router para gestión de usuarios
-pub fn router() -> Router {
+pub fn router() -> Router<Arc<AppState>> {
     Router::new()
         .route("/", get(list_users))
         .route("/", post(create_user))
